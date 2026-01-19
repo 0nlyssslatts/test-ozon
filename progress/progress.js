@@ -1,8 +1,15 @@
-export function createProgress(mountNode) {
+export function createProgress(mountNode, initialState = {}) {
     if (!mountNode) return;
 
     const radius = 38;
-    const circumference = Math.PI * radius;
+    const circumference = 2 * Math.PI * radius;
+
+    const state = {
+        value: 0,
+        animated: false,
+        hidden: false,
+        ...initialState,
+    };
 
     const refs = {
         root: null,
@@ -20,6 +27,8 @@ export function createProgress(mountNode) {
         const svgNS = "http://www.w3.org/2000/svg";
         const svg = document.createElementNS(svgNS, "svg");
         svg.setAttribute("viewBox", "0 0 100 100");
+        svg.setAttribute("width", "100%");
+        svg.setAttribute("height", "100%");
 
         const track = document.createElementNS(svgNS, "circle");
         track.setAttribute("cx", "50");
@@ -53,5 +62,38 @@ export function createProgress(mountNode) {
         mountNode.replaceChildren(root);
     }
 
+    function clampValue(value) {
+        const num = Number(value);
+        if (!Number.isFinite(num)) return 0;
+        return Math.max(0, Math.min(100, Math.round(num)));
+    }
+
+
+    function applyState() {
+        const { value, animated, hidden } = state;
+
+        const offset = circumference * (1 - value / 100);
+        refs.progressCircle.style.strokeDashoffset = offset;
+
+        refs.root.classList.toggle("progress--animated", animated);
+        refs.root.classList.toggle("progress--hidden", hidden);
+    }
+
+
+    function update(nextState = {}) {
+        if ("value" in nextState) {
+            state.value = clampValue(nextState.value);
+        }
+        if ("animated" in nextState) {
+            state.animated = Boolean(nextState.animated);
+        }
+        if ("hidden" in nextState) {
+            state.hidden = Boolean(nextState.hidden);
+        }
+        applyState();
+    }
+
+
     render();
+    update(state)
 }
