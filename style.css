@@ -2,7 +2,11 @@
   --bg: #eef1f6;
   --card: #ffffff;
   --text: #0e1621;
+
   --radius: 16px;
+
+  --track: #dfe6ef;
+  --progress: #1d66ff;
 }
 
 * {
