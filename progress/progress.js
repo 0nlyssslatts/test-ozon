@@ -92,10 +92,6 @@ export function createProgress(mountNode, initialState = {}) {
         applyState();
     }
 
-    function destroy() {
-        mountNode.innerHTML = "";
-    }
-
     render();
     update(state)
 
@@ -105,6 +101,5 @@ export function createProgress(mountNode, initialState = {}) {
         setValue: (value) => update({ value: value }),
         setAnimated: (isAnimated) => update({ animated: isAnimated }),
         setHidden: (isHidden) => update({ hidden: isHidden }),
-        destroy,
     };
 }
