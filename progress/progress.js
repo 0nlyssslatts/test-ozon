@@ -1,3 +1,5 @@
+import { clampProgressValue } from "../utils/clampProgressValue.js";
+
 export function createProgress(mountNode, initialState = {}) {
     if (!mountNode) return;
 
@@ -62,12 +64,6 @@ export function createProgress(mountNode, initialState = {}) {
         mountNode.replaceChildren(root);
     }
 
-    function clampValue(value) {
-        const num = Number(value);
-        if (!Number.isFinite(num)) return 0;
-        return Math.max(0, Math.min(100, Math.round(num)));
-    }
-
     function applyState() {
         const { value, animated, hidden } = state;
 
@@ -78,10 +74,9 @@ export function createProgress(mountNode, initialState = {}) {
         refs.root.classList.toggle("progress--hidden", hidden);
     }
 
-
     function update(nextState = {}) {
         if ("value" in nextState) {
-            state.value = clampValue(nextState.value);
+            state.value = clampProgressValue(nextState.value);
         }
         if ("animated" in nextState) {
             state.animated = Boolean(nextState.animated);

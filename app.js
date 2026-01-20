@@ -1,4 +1,5 @@
 import { createProgress } from "./progress/progress.js";
+import { clampProgressValue } from "./utils/clampProgressValue.js";
 
 const mount = document.getElementById("progressMount");
 const valueInput = document.getElementById("valueInput");
@@ -11,10 +12,7 @@ function parseValue(raw) {
     const cleaned = String(raw ?? "").trim().replace(/[^\d]/g, "");
     if (!cleaned) return null;
 
-    const num = Number(cleaned);
-    if (!Number.isFinite(num)) return null;
-
-    return Math.max(0, Math.min(100, Math.round(num)));
+    return clampProgressValue(cleaned);
 }
 
 function syncFromUI() {
