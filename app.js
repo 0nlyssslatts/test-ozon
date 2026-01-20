@@ -22,7 +22,8 @@ function syncFromUI() {
         valueInput.value = String(value);
         progress.setValue(value);
     } else {
-        return
+        valueInput.value = "0"
+        progress.setValue(0)
     }
 
     progress.setAnimated(animateToggle.checked);
