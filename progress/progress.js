@@ -68,7 +68,6 @@ export function createProgress(mountNode, initialState = {}) {
         return Math.max(0, Math.min(100, Math.round(num)));
     }
 
-
     function applyState() {
         const { value, animated, hidden } = state;
 
@@ -93,7 +92,19 @@ export function createProgress(mountNode, initialState = {}) {
         applyState();
     }
 
+    function destroy() {
+        mountNode.innerHTML = "";
+    }
 
     render();
     update(state)
+
+
+    return {
+        update,
+        setValue: (value) => update({ value: value }),
+        setAnimated: (isAnimated) => update({ animated: isAnimated }),
+        setHidden: (isHidden) => update({ hidden: isHidden }),
+        destroy,
+    };
 }
