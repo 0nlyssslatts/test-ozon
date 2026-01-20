@@ -92,7 +92,6 @@ export function createProgress(mountNode, initialState = {}) {
 
 
     return {
-        update,
         setValue: (value) => update({ value: value }),
         setAnimated: (isAnimated) => update({ animated: isAnimated }),
         setHidden: (isHidden) => update({ hidden: isHidden }),
