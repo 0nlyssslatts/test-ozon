@@ -5,6 +5,7 @@ const mount = document.getElementById("progressMount");
 const valueInput = document.getElementById("valueInput");
 const animateToggle = document.getElementById("animateToggle");
 const hideToggle = document.getElementById("hideToggle");
+const form = document.getElementById("controls");
 
 const progress = createProgress(mount, { value: 0, animated: false, hidden: false });
 
@@ -32,6 +33,9 @@ function syncFromUI() {
 
 syncFromUI();
 
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+});
 
 valueInput.addEventListener("input", syncFromUI);
 animateToggle.addEventListener("change", syncFromUI);
