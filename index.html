@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
   <head>
     <meta charset="UTF-8">
@@ -12,19 +12,45 @@
 
   <body>
     <main class="page">
-      <section class="card">
-        <header class="card__header">
-          <h1 class="card__title">Progress</h1>
-        </header>
-        <div class="layout">
-          <div class="layout__progress">
-            <div id="progressMount" class="progress-mount"></div>
-          </div>
-          <div class="layout__controls">
-            text
-          </div>
-        </div>
-      </section>
+      <header class="page__header">
+        <h1 class="page__title">Progress</h1>
+      </header>
+
+      <div class="layout">
+        <section class="layout__progress">
+          <div id="progressMount" class="progress-mount"></div>
+        </section>
+
+        <section class="layout__controls">
+          <form class="controls">
+            <div class="control-row">
+              <input id="valueInput" class="value-input" type="text"
+                inputmode="numeric" placeholder="0..100" />
+              <label class="control-row__label" for="valueInput">Value</label>
+            </div>
+
+            <div class="toggle-row">
+              <div class="switch">
+                <input id="animateToggle" class="switch__input"
+                  type="checkbox" />
+                <span class="switch__track"></span>
+                <span class="switch__thumb"></span>
+              </div>
+              <label class="toggle-row__label"
+                for="animateToggle">Animate</label>
+            </div>
+
+            <div class="toggle-row">
+              <div class="switch">
+                <input id="hideToggle" class="switch__input" type="checkbox" />
+                <span class="switch__track"></span>
+                <span class="switch__thumb"></span>
+              </div>
+              <label class="toggle-row__label" for="hideToggle">Hide</label>
+            </div>
+          </form>
+        </section>
+      </div>
     </main>
   </body>
 
